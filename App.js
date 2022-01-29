@@ -1,11 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { View, StyleSheet, Button } from 'react-native';
+import * as Speech from 'expo-speech';
+import defineLazyObjectProperty from 'react-native/Libraries/Utilities/defineLazyObjectProperty';
 
-export default function App() {
+const App = () => {
+    const [text, setText] = React.useState("Ouvindo com Expo Speech");
+
+    const speak = () => {
+    Speech.speak(text, {
+      language: "pt-br"
+      //language: "en-us"
+    });
+  };
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Button title="Clique para ouvir" onPress={speak} />
     </View>
   );
 }
@@ -13,8 +23,16 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#ecf0f1',
+    padding: 8,
   },
+  Texts: {
+    marginTop: 10,
+    color: 'black',
+    padding:10,
+  }
 });
+
+
+export default App;
